@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock %}</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+        <link rel="stylesheet" href="">
+{#        <link rel="stylesheet" href="{% static 'css/debugger.css' %}">#}
+
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    </head>
+    <body>
+
+        <!--  NAVBAR -->
+        <nav class="navbar is-transparent is-primary" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+                <a class="navbar-item" href="{% url 'climbs_list' %}">
+                    <h1 class="title is-large">Critique My Climb</h1>
+                </a>
+                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </div>
+            <div class="navbar-menu">
+                <div class="navbar-start">
+
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        {% if user.is_authenticated %}
+                            <span>Hi, {{ user.username }}</span>
+                            <a href="{% url 'logout' %}">logout</a>
+                            <a class="button" href="{% url 'climbs_new' %}">
+                                <span class="icon">
+                                    <i class="fas fa-plus"></i>
+                                </span>
+                            </a>
+                        {% else %}
+                             <a href="{% url 'login' %}">login</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- CONTENT-->
+        {% block content %}
+        {% endblock %}
+
+    </body>
+</html>
